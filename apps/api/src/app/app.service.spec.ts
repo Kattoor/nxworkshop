@@ -13,9 +13,17 @@ describe('AppService', () => {
     service = app.get<AppService>(AppService);
   });
 
-  describe('getData', () => {
-    it('should return "Welcome to api!"', () => {
-      expect(service.getData()).toEqual({ message: 'Welcome to api!' });
+  describe('getGame', () => {
+    it('should return the correct game', () => {
+      expect(service.getGame('purrfection')).toEqual(
+        {
+          "description": "A cat grooming contest goes horribly wrong.",
+          "id": "purrfection",
+          "image": "/assets/cat.png",
+          "name": "Purrfection",
+          "price": 45,
+          "rating": expect.any(Number)
+        });
     });
   });
 });
