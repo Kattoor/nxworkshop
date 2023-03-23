@@ -13,10 +13,18 @@ describe('AppController', () => {
     }).compile();
   });
 
-  describe('getData', () => {
-    it('should return "Welcome to api!"', () => {
+  describe('getGame', () => {
+    it('should return the correct game', () => {
       const appController = app.get<AppController>(AppController);
-      expect(appController.getData()).toEqual({ message: 'Welcome to api!' });
+      expect(appController.getGame('purrfection')).toEqual(
+        {
+          "description": "A cat grooming contest goes horribly wrong.",
+          "id": "purrfection",
+          "image": "/assets/cat.png",
+          "name": "Purrfection",
+          "price": 45,
+          "rating": expect.any(Number)
+        });
     });
   });
 });
