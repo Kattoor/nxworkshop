@@ -35,6 +35,10 @@
             "label": "store"
           },
           {
+            "value": "videos",
+            "label": "videos"
+          },
+          {
             "value": "shared",
             "label": "shared"
           }
