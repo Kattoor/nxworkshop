@@ -5,6 +5,20 @@ import {
   updateJson,
 } from '@nrwl/devkit';
 import { UpdateScopeSchemaGeneratorSchema } from './schema';
+import { sep } from 'path';
+
+function fixProjectsWithoutScope(tree: Tree, projectMap: Map<string, ProjectConfiguration>) {
+  for (const [projectName, project] of projectMap.entries()) {
+    const projectScopeByName = projectName.split('-')[0];
+    const scopeString = `scope:${projectScopeByName}`;
+    if (!project.tags) {
+      project.tags = [scopeString];
+    } else if (!project.tags.includes(scopeString)) {
+      project.tags.push(scopeString);
+    }
+    tree.write(`${project.root}${sep}project.json`, JSON.stringify(project));
+  }
+}
 
 function getDistinctScopes(projectMap: Map<string, ProjectConfiguration>) {
   const projects = [...projectMap.values()];
@@ -43,7 +57,9 @@ function updateTypeDef(tree: Tree, scopes: string[]) {
 }
 
 export default async function (tree: Tree, options: UpdateScopeSchemaGeneratorSchema) {
-  const scopes = getDistinctScopes(getProjects(tree));
+  const projects = getProjects(tree);
+  fixProjectsWithoutScope(tree, projects);
+  const scopes = getDistinctScopes(projects);
   updateSchema(tree, scopes);
   updateTypeDef(tree, scopes);
   await formatFiles(tree);

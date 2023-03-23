@@ -31,6 +31,10 @@
             "label": "api"
           },
           {
+            "value": "internal",
+            "label": "internal"
+          },
+          {
             "value": "store",
             "label": "store"
           },
@@ -41,6 +45,10 @@
           {
             "value": "shared",
             "label": "shared"
+          },
+          {
+            "value": "util",
+            "label": "util"
           }
         ]
       }
