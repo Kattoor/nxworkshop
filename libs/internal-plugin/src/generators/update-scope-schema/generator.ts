@@ -3,9 +3,9 @@ import {
   ProjectConfiguration,
   Tree,
   updateJson,
+  updateProjectConfiguration,
 } from '@nrwl/devkit';
 import { UpdateScopeSchemaGeneratorSchema } from './schema';
-import { sep } from 'path';
 
 function fixProjectsWithoutScope(tree: Tree, projectMap: Map<string, ProjectConfiguration>) {
   for (const [projectName, project] of projectMap.entries()) {
@@ -16,7 +16,7 @@ function fixProjectsWithoutScope(tree: Tree, projectMap: Map<string, ProjectConf
     } else if (!project.tags.includes(scopeString)) {
       project.tags.push(scopeString);
     }
-    tree.write(`${project.root}${sep}project.json`, JSON.stringify(project));
+    updateProjectConfiguration(tree, projectName, project);
   }
 }
 
