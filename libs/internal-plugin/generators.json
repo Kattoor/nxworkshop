@@ -12,6 +12,11 @@
       "factory": "./src/generators/feature-lib/generator",
       "schema": "./src/generators/feature-lib/schema.json",
       "description": "feature-lib generator"
+    },
+    "update-scope-schema": {
+      "factory": "./src/generators/update-scope-schema/generator",
+      "schema": "./src/generators/update-scope-schema/schema.json",
+      "description": "update-scope-schema generator"
     }
   }
 }
