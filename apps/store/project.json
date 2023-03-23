@@ -89,6 +89,21 @@
           "codeCoverage": true
         }
       }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npx surge dist/apps/store ${SURGE_DOMAIN} --token ${SURGE_TOKEN}"
+      }
+    },
+    "windows-deploy": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "outputs": [],
+      "options": {
+        "command": "npx surge dist/apps/store %SURGE_DOMAIN% --token %SURGE_TOKEN%"
+      }
     }
   },
   "tags": ["scope:store", "type:app"]
